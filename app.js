@@ -21,24 +21,8 @@ var indexRoutes = require("./routes/index");
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 
-// mongoose.connect("mongodb://localhost/yelp_camp");
-mongoose.connect("mongodb+srv://edes:%5D*u%22uqQS%3F!--.j%2B%60w9@yelpcamp-iidem.mongodb.net/test?retryWrites=true&w=majority");
-
-// Campground.create(
-//     {
-//         name: "Granite Hill",
-//         image: "https://www.nps.gov/grte/planyourvisit/images/JLCG_tents_Teewinot_2008_mattson_1.JPG?maxwidth=1200&maxheight=1200&autorotate=false",
-//         description: "This is a huge granite hill, no bathrooms. No water. Beautiful granite."
-//     }, function(err, campground){
-//         if(err){
-//             console.log("Error!");
-//             console.log(err);
-//         }
-//         else{
-//             console.log("Newly created campground!");
-//             console.log(campground);
-//         }
-//     });
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
