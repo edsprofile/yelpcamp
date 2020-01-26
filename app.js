@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -14,8 +16,6 @@ var seedDB = require("./seeds");
 var commentRoutes = require("./routes/comments");
 var campgroundRoutes = require("./routes/campgrounds");
 var indexRoutes = require("./routes/index");
-
-
 
 //get rid of deprecation warnings
 mongoose.set("useNewUrlParser", true);
@@ -54,8 +54,8 @@ app.use(function(req, res, next){
 
 //requiring routes
 app.use("/", indexRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
 app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 let port = process.env.PORT;
 if(port == null || port == ""){
