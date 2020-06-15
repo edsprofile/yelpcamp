@@ -1,4 +1,5 @@
 <%- include("../partials/header") %>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -16,13 +17,13 @@
                 <div class="card-body">
                     <p class="float-right">$<%= campground.price %>/night</p>
                     <h5 class="card-title"><%= campground.name %></h5>
-                        <p class="card-subtitle mb-2 text-muted">
-                            Submitted by <%= campground.author.username %>
+                        <p class="card-subtitle mb-2 text-muted font-italic">
+                            Submitted by <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %>
                         </p>
                         <hr />
                     <p class="card-text"><%= campground.description %></p>
-                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-                        <a class="btn btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                    <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+                        <a class="btn btn-warning text-white" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
                         <form class="delete-form" action="/campgrounds/<%= campground._id %>?_method=delete" method="post">
                             <button class="btn btn-danger">Delete</button>
                         </form>
@@ -47,11 +48,11 @@
                                             </p>
                                         </div>
                                         <div class="float-right">
-                                        <p>10 days ago</p>
-                                        
-                                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>                            
+                                        <p><%= moment(campground.createdAt).fromNow() %></p>
 
-                                                <a class="btn btn-sm btn-warning"
+                                        <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+
+                                                <a class="btn btn-sm btn-warning text-white"
                                                    href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
                                                     Edit
                                                 </a>

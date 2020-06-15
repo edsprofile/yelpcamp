@@ -29,13 +29,14 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require("moment");
 
 // seed database
 //seedDB();
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "Some super secret thing that can be anything I want.",
+    secret: process.env.SUPERSECRET,
     resave: false,
     saveUninitialized: false
 }));

@@ -3,14 +3,14 @@ var router = express.Router();
 var Campground = require("../models/campground");
 var middleware = require("../middleware");
 var NodeGeocoder = require('node-geocoder');
- 
+
 var options = {
   provider: 'google',
   httpAdapter: 'https',
   apiKey: process.env.GEOCODER_API_KEY,
   formatter: null
 };
- 
+
 var geocoder = NodeGeocoder(options);
 
 // INDEX - show all campgrounds
@@ -90,8 +90,8 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
 
     //does user own the campground?
     Campground.findById(req.params.id, function(err, foundCampground){
-        res.render("campgrounds/edit", {campground: foundCampground});    
-    });   
+        res.render("campgrounds/edit", {campground: foundCampground});
+    });
 });
 
 // UPDATE CAMPGROUND ROUTE
